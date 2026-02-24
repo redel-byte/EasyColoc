@@ -28,7 +28,7 @@
         <!-- Logo/Brand Section -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center self-left w-1/4">
-                <img class="w-full h-full object-contain" src="{{ asset('images/P2L.webp') }}" alt="Play2Learn Logo">
+                <img class="w-full h-full object-contain" src="{{ asset('images/EasyColoc.webp') }}" alt="Play2Learn Logo">
             </div>
             <h1 class="text-3xl font-bold text-text mb-2">Create Account</h1>
             <p class="text-gray-600">Join Play2Learn and start your learning journey</p>
