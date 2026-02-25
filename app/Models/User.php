@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,9 +19,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -44,5 +47,53 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function Membership(): HasMany
+    {
+        return $this->hasMany(Membership::class);
+    }
+    
+    public function Expense(): HasMany
+    {
+        return $this->hasMany(Expense::class);
+    }
+    
+    public function Invitation(): HasMany
+    {
+        return $this->hasMany(Invitation::class);
+    }
+    
+    public function Payment(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+    
+    // Helper methods for business logic
+    public function activeColocations()
+    {
+        return $this->belongsToMany(Colocation::class, 'memberships')
+            ->where('is_active', true)
+            ->withPivot('role', 'joined_at');
+    }
+    
+    public function currentColocation()
+    {
+        return $this->activeColocations()->first();
+    }
+    
+    public function hasActiveColocation()
+    {
+        return $this->Membership()->where('is_active', true)->exists();
+    }
+    
+    public function isGlobalAdmin()
+    {
+        return $this->is_admin;
+    }
+    
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
     }
 }
