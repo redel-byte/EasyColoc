@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->timestamp( 'create_at');
-            $table->boolean('is_admin')->default(false);
-            $table->integer('reputation');
+            $table->boolean('is_admin');
+            $table->integer('reputation')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
