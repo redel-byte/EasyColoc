@@ -26,9 +26,9 @@
 <body class="bg-background min-h-screen flex items-center justify-center">
     <div class="w-full max-w-md">
         <!-- Logo/Brand Section -->
-        <div class="text-center mb-8">
+        <div class="text-center my-4">
             <div class="inline-flex items-center justify-center self-left w-1/4">
-                <img class="w-full h-full object-contain" src="{{ asset('images/EasyColoc.webp') }}" alt="Play2Learn Logo">
+                <img class="w-full h-full object-contain mt-2" src="{{ asset('images/EasyColoc.webp') }}" alt="Play2Learn Logo">
             </div>
             <h1 class="text-3xl font-bold text-text mb-2">Create Account</h1>
             <p class="text-gray-600">Join Play2Learn and start your learning journey</p>
@@ -38,25 +38,40 @@
         <div class="bg-white rounded-2xl shadow-xl p-8">
             <form action="{{ route('register') }}" method="post" class="space-y-6">
                 @csrf
-
-                <!-- Name Field -->
+                <!-- first name Field -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-text mb-2">
-                        Full Name
+                    <label for="first_name" class="block text-sm font-medium text-text mb-2">
+                        First Name
                     </label>
                     <input
                         type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        value="{{ old('name') }}"
+                        id="first_name"
+                        name="first_name"
+                        placeholder="Enter your First name"
+                        value="{{ old('first_name') }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 bg-background text-text placeholder-gray-500"
                         required>
-                    @error('name')
+                    @error('first_name')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-
+                <!-- last name feild -->
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-text mb-2">
+                        Last Name
+                    </label>
+                    <input
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        placeholder="Enter your last name"
+                        value="{{ old('last_name') }}"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 bg-background text-text placeholder-gray-500"
+                        required>
+                    @error('last_name')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-text mb-2">
