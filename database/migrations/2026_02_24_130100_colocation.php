@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('status',['active','cancelled']);
             $table->timestamp('create_at');
             $table->timestamp('updated_at');
-            $table->timestamp('cancelled_at');
+            $table->timestamp('cancelled_at')->nullable();
         });
     }
 
