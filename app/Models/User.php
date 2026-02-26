@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'reputation',
     ];
 
     /**
@@ -69,7 +70,17 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
     
-    // Helper methods for business logic
+    public function balancesAsDebtor()
+    {
+        return $this->hasMany(Balance::class, 'debtor_id');
+    }
+    
+    public function balancesAsCreditor()
+    {
+        return $this->hasMany(Balance::class, 'creditor_id');
+    }
+    
+    // business logic
     public function activeColocations()
     {
         return $this->belongsToMany(Colocation::class, 'memberships')
@@ -85,11 +96,6 @@ class User extends Authenticatable
     public function hasActiveColocation()
     {
         return $this->Membership()->where('is_active', true)->exists();
-    }
-    
-    public function isGlobalAdmin()
-    {
-        return $this->is_admin;
     }
     
     public function getFullNameAttribute()
