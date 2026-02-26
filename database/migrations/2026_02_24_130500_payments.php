@@ -16,10 +16,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('colocation_id')->references('id')->on('colocation');
             $table->foreignId('payer_id')->references('id')->on('users');
-            $table->decimal('amount');
+            $table->foreignId('receiver_id')->nullable()->references('id')->on('users');
+            $table->decimal('amount', 10, 2);
             $table->date('payment_date');
-            $table->boolean('is_marked');
-            $table->timestamp('create_at');
+            $table->boolean('is_marked')->default(false);
+            $table->timestamps();
         });
     }
 
