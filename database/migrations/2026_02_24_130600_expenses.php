@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('payer_id')->references('id')->on('users');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->string('title');
+            $table->decimal('amount', 10, 2);
             $table->date('expence_date');
+            $table->timestamps();
         });
     }
 

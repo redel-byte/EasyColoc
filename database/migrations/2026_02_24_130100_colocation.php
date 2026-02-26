@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('colocation',function(Blueprint $table){
             $table->id();
             $table->string('name');
+            $table->text('description');
             $table->enum('status',['active','cancelled']);
             $table->timestamp('create_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable();
             $table->timestamp('cancelled_at')->nullable();
         });
     }
