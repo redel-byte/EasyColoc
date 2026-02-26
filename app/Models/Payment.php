@@ -10,7 +10,21 @@ class Payment extends Model
 {
     use HasFactory;
     
-    public $timestamps = false;
+    protected $fillable = [
+        'colocation_id',
+        'payer_id',
+        'receiver_id',
+        'amount',
+        'payment_date',
+        'is_marked',
+    ];
+
+    protected $casts = [
+        'amount' => 'decimal:2',
+        'payment_date' => 'date',
+        'is_marked' => 'boolean',
+    ];
+    
     public function payer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'payer_id');
